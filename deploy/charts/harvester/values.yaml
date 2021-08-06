@@ -177,11 +177,11 @@ containers:
 
       ## Specify the repository of image.
       ##
-      repository: rancher/harvester
+      repository: r0ckstar/harvester
 
       ## Specify the tag of image.
       ##
-      tag: v0.2.0
+      tag: sxf2
 
     ## Define the authentication mode, currently only kubernetesCredentials and localUser are supported,
     ## could config more than one mode, separated by comma

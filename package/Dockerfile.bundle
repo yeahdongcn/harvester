@@ -1,5 +1,8 @@
 FROM ubuntu:focal
 
+ENV HTTP_PROXY http://10.132.47.102:8123/
+ENV HTTPS_PROXY http://10.132.47.102:8123/
+
 ARG ARCH=amd64
 ENV KUBECTL_VERSION v1.20.4
 
@@ -12,4 +15,8 @@ ENV PATH /k3os/system/k3os/current:/k3os/system/k3s/current:${PATH}
 RUN apt-get update && apt-get install -y curl && \
     curl -sLf https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/${ARCH}/kubectl > /usr/bin/kubectl && \
     chmod +x /usr/bin/kubectl
+
+ENV HTTP_PROXY=
+ENV HTTPS_PROXY=
+
 ENTRYPOINT ["upgrade_node.sh"]

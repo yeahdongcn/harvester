@@ -1,4 +1,8 @@
 FROM alpine
+
+ENV HTTP_PROXY http://10.132.47.102:8123/
+ENV HTTPS_PROXY http://10.132.47.102:8123/
+
 RUN apk update && apk add -u --no-cache git curl unzip tar tini bash nfs-utils && \
     adduser -D harvester && su -l harvester && \
     mkdir -p /var/lib/harvester/harvester && \
@@ -15,7 +19,7 @@ ARG VERSION=dev
 ENV HARVESTER_SERVER_VERSION ${VERSION}
 RUN mkdir -p /usr/share/harvester/harvester && \
     cd /usr/share/harvester/harvester && \
-    curl -sL https://releases.rancher.com/harvester-ui/${HARVESTER_UI_VERSION}.tar.gz | tar xvzf - --strip-components=2 && \
+    curl -sL https://github.com/yeahdongcn/harvester-dist/raw/main/arielg.tar.gz | tar xvzf - --strip-components=2 && \
     mkdir -p /usr/share/harvester/harvester/api-ui && \
     cd /usr/share/harvester/harvester/api-ui && \
     curl -sL https://releases.rancher.com/api-ui/${HARVESTER_API_UI_VERSION}.tar.gz | tar xvzf - --strip-components=1 && \
@@ -25,4 +29,8 @@ COPY entrypoint.sh harvester /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 
 VOLUME /var/lib/harvester/harvester
+
+ENV HTTP_PROXY=
+ENV HTTPS_PROXY=
+
 ENTRYPOINT ["entrypoint.sh"]

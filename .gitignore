@@ -2,6 +2,7 @@
 /.cache
 /bin
 /dist
+/package
 *.swp
 .idea
 /harvester
